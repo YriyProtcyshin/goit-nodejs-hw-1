@@ -32,14 +32,14 @@ async function removeContact(contactId) {
 // ===================== addContact =============================
 async function addContact(name, email, phone) {
   const contacts = await listContacts();
-  const addContact = { id: getId(contacts), name, email, phone };
+  const addContact = { id: createId(contacts), name, email, phone };
   contacts.push(addContact);
   fs.writeFile(contactsPath, JSON.stringify(contacts));
   return addContact;
 }
 
-// getId
-function getId(contacts) {
+// createId
+function createId(contacts) {
   const listId = contacts.map((contact) => Number(contact.id));
   return (Math.max(...listId) + 1).toString();
 }
